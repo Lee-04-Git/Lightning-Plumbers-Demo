@@ -1,0 +1,173 @@
+@import 'tailwindcss';
+
+/*
+ * "Fresh Water" palette: soft, professional green tones for plumbing.
+ *  • navy: trust, text and dark sections
+ *  • brand: a soft, muted green for accents, links and focus (plumbing/water theme)
+ *  • signal: a faint green for calls to action and highlights
+ *  • wave: light water blue for fills and tints
+ *  • mist: cool, crisp whites so photos and colour stand out
+ * The green tones are subtle and professional, evoking clean water and natural freshness.
+ */
+@theme {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-navy-950: #0a1b30;
+  --color-navy-900: #0f2541;
+  --color-navy-800: #163356;
+  --color-navy-700: #1e4470;
+  --color-navy-600: #2a5a91;
+  --color-navy-300: #a6b7cc;
+  --color-navy-200: #c9d5e4;
+  --color-navy-100: #e4ebf3;
+
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86d9a0;
+  --color-brand-400: #5bbf7a;
+  --color-brand-500: #3da560;
+  --color-brand-600: #2d8a4d;
+  --color-brand-700: #1e6b39;
+
+  --color-signal-100: #e8f5e9;
+  --color-signal-200: #c8e6c9;
+  --color-signal-300: #a5d6a7;
+  --color-signal-400: #81c784;
+  --color-signal-500: #66bb6a;
+  --color-signal-600: #4caf50;
+
+  --color-wave-100: #e0f4fb;
+  --color-wave-200: #bde7f6;
+  --color-wave-300: #8ad5ee;
+  --color-wave-400: #45bce3;
+  --color-wave-500: #1a9fcc;
+  --color-wave-700: #0c6a8a;
+
+  --color-mist-50: #fcfdfe;
+  --color-mist-100: #f2f5f9;
+  --color-mist-200: #e4eaf1;
+  --color-mist-300: #cfd8e3;
+
+  --color-steel-500: #586377;
+  --color-steel-600: #445066;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1fb457;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-spin-slow: spin-slow 22s linear infinite;
+
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    background: var(--color-navy-900);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply m-0 min-h-svh w-full bg-navy-900 font-sans text-navy-950 antialiased;
+  }
+  /* Full-width app root. Decorative elements may bleed past the edge; clip them so the page never scrolls sideways
+     (clip, unlike hidden, keeps the sticky header and section nav working). */
+  #root {
+    width: 100%;
+    min-height: 100svh;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    @apply bg-signal-200 text-navy-950;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-10;
+  }
+  /* Job-ticket labels: small monospaced caps, like a work order */
+  .label {
+    @apply font-mono text-[0.75rem] font-medium tracking-[0.14em] uppercase;
+  }
+  /* Display headings share one rhythm; size is set per use */
+  .display {
+    @apply font-display leading-[0.92] font-extrabold tracking-[-0.045em];
+  }
+  /* Faint blueprint grid used behind heroes */
+  .blueprint {
+    background-image:
+      linear-gradient(to right, rgb(10 27 48 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(10 27 48 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 70% at 70% 30%, black 20%, transparent 75%);
+  }
+  .blueprint-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 10%, transparent 75%);
+  }
+  /* Perforated edge on job-ticket cards */
+  .ticket {
+    --hole: 7px;
+    mask:
+      radial-gradient(circle var(--hole) at 0 50%, transparent 98%, black) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--hole) at 100% 50%, transparent 98%, black) right / 51% 100% no-repeat;
+  }
+}
+
+/* Drop cap for editorial body copy */
+.drop-cap::first-letter {
+  float: left;
+  margin: 0.06em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 4.2em;
+  line-height: 0.8;
+  color: var(--color-brand-600);
+}
+
+/* Respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

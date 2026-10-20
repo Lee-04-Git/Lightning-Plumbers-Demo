@@ -1,0 +1,5 @@
+# Missing build files must 404, never fall back to the page (that causes a blank screen after an update)
+/assets/*   /index.html   404
+
+# Every other path is a page of the single-page app
+/*          /index.html   200
