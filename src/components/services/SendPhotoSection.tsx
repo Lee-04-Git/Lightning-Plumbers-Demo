@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { projects, site } from '../../config/site'
+import { site, stock } from '../../config/site'
 import { defaultWhatsAppMessage, whatsappHref } from '../../lib/contact'
 import { buttonClass } from '../ui/buttonClass'
 import { WhatsAppIcon } from '../ui/Icons'
 import { Photo, Reveal } from '../ui/primitives'
 
-/** The photo shown in the WhatsApp chat preview. */
-const chatPhoto = projects.find((p) => p.slug === 'kitchen-tap')!.images[0]
+/** The photo shown in the WhatsApp chat preview (free-licence stock photo, see `stock`). */
+const chatPhoto = stock('kitchen-sink-tap', '', '30% 50%')
 
 /** Call-to-action: send a photo of your job on WhatsApp for quick assessment and quote. */
 export function SendPhotoSection() {

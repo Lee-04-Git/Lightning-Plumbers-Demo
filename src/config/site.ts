@@ -15,6 +15,16 @@ export type ServiceId = 'electrical' | 'solar' | 'maintenance'
 export const WORK_WIDTHS = [480, 800, 1200]
 export type Img = { base: string; alt: string; position?: string }
 const work = (name: string, alt: string, position?: string): Img => ({ base: `/images/work/${name}`, alt, position })
+/**
+ * Free-licence stock photos (Pexels License), made by `npm run images:stock` at the same widths as
+ * job photos. Sources are listed in assets/source/stock/CREDITS.md. These illustrate a service;
+ * they are not the business's own jobs.
+ */
+export const stock = (name: string, alt: string, position?: string): Img => ({
+  base: `/images/stock/${name}`,
+  alt,
+  position,
+})
 
 export const site = {
   name: 'Lightning Plumbers',
@@ -138,42 +148,41 @@ export const services: {
   },
 ]
 
-/** Additional services, as listed on the business's own FB flyer (Mar 2026). */
 /**
  * Additional services, as listed on the business's own FB flyer (Mar 2026). Each card on the
- * Services page uses `image`; to use a different picture (e.g. a generated illustration), put
- * a WebP in public/images/ and point `image.base` at it (see `WORK_WIDTHS` for the sizes needed).
+ * Services page uses `image`, a free-licence stock photo (see `stock`); swap in the business's
+ * own job photos with `work(...)` once they are supplied.
  */
 export const moreServices: { title: string; text: string; image: Img }[] = [
   {
     title: 'Burst pipe repairs',
     text: 'Finding and repairing burst supply pipes, including pipes that run underground.',
-    image: work('burst-morgans-01', 'Trench dug along a wall to reach a burst underground pipe', '50% 60%'),
+    image: stock('leaking-pipe', 'Old metal water pipe dripping from a leak'),
   },
   {
     title: 'Blocked drains',
     text: 'Clearing blocked drains so water runs away freely again.',
-    image: work('outdoor-sink-01', 'Outdoor double sink with its waste and drainage pipework'),
+    image: stock('sink-drain', 'Close-up of a stainless steel sink drain'),
   },
   {
     title: 'Bathroom renovations',
     text: 'Bathroom plumbing for renovations, from toilets and basins to showers and baths.',
-    image: work('bathroom-clawfoot-01', 'Renovated bathroom with a clawfoot bath and brass taps'),
+    image: stock('bathroom-freestanding-tub', 'Modern bathroom with a freestanding bath and walk-in shower'),
   },
   {
     title: 'Geyserwise unit installation',
     text: 'Fitting Geyserwise controllers to monitor and control your geyser.',
-    image: work('solar-surrey-02', 'Inside of a Geyserwise geyser controller during installation'),
+    image: stock('wall-controller', 'Wall-mounted digital temperature controller', '60% 50%'),
   },
   {
     title: 'Heat pump installation',
     text: 'Installing heat pumps for heating your home’s water.',
-    image: work('solar-maitland-02', 'Hot water tank mounted on a steel stand on a rooftop', '50% 40%'),
+    image: stock('heat-pump-unit', 'Outdoor heat pump unit mounted on a white wall', '55% 50%'),
   },
   {
     title: 'COC certificates',
     text: 'Plumbing certificates of compliance (COC) for your property.',
-    image: work('water-meters-saltriver-01', 'Water meters and supply pipework installed in a ceiling void', '50% 70%'),
+    image: stock('compliance-inspection', 'Inspector in a safety vest holding a compliance checklist'),
   },
 ]
 

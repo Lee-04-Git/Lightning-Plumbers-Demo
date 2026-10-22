@@ -7,35 +7,33 @@ import { SendPhotoSection } from '../components/services/SendPhotoSection'
 import { buttonClass } from '../components/ui/buttonClass'
 import { expo } from '../components/ui/motion'
 import { ClipReveal, LineReveal, Photo, Reveal } from '../components/ui/primitives'
-import { moreServices, projects, services, type Img, type ServiceId } from '../config/site'
+import { moreServices, services, stock, type Img, type ServiceId } from '../config/site'
 import { quoteHref } from '../lib/contact'
 import { scrollToId } from '../lib/scroll'
 
 /* ─────────────────────────── Data ─────────────────────────── */
 
-/** The job photos shown with each service: [project slug, photo index, framing]. */
-const gallery: Record<ServiceId, [slug: string, img: number, position?: string][]> = {
+/**
+ * The photos shown with each service: free-licence stock photos (see assets/source/stock/CREDITS.md),
+ * not the business's own jobs. The first one is also the service's picture in the overview.
+ */
+const gallery: Record<ServiceId, Img[]> = {
   electrical: [
-    ['geyser-relocation', 0, '30% 45%'],
-    ['geyser-relocation', 1],
+    stock('electric-geyser-laundry', 'Electric geyser mounted on a wall above a washer and dryer', '30% 45%'),
+    stock('copper-pipe-bending', 'Copper pipe held in a vice while it is cut and shaped'),
   ],
   solar: [
-    ['solar-maitland', 0, '60% 25%'],
-    ['solar-diepriver', 0, '50% 45%'],
-    ['solar-surrey', 1],
+    stock('solar-geyser-roof', 'Solar geyser on a roof under a cloudy sky', '50% 30%'),
+    stock('solar-geyser-rooftop', 'Solar geyser with its tank and collector on a flat rooftop', '50% 60%'),
+    stock('solar-geysers-city', 'Solar geysers on the roof of an apartment building', '50% 20%'),
   ],
   maintenance: [
-    ['burst-seapoint', 0, '50% 45%'],
-    ['kitchen-tap', 0, '45% 55%'],
-    ['outdoor-sink', 0],
+    stock('plumber-pipe-fittings', 'Hands tightening steel pipe fittings', '50% 45%'),
+    stock('plumber-wrench-pipe', 'Plumber using a wrench on a water pipe', '50% 40%'),
+    stock('basin-mixer-tap', 'Stainless steel mixer tap over a dark basin', '50% 40%'),
   ],
 }
-const photosFor = (id: ServiceId) =>
-  gallery[id].map(([slug, img, position]) => {
-    const p = projects.find((x) => x.slug === slug)!
-    const image: Img = { ...p.images[img], ...(position ? { position } : {}) }
-    return { image, job: p.title, place: p.place }
-  })
+const photosFor = (id: ServiceId) => gallery[id].map((image) => ({ image }))
 
 const sections = [
   ...services.map((s) => ({ id: s.id as string, label: s.short })),
