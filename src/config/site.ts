@@ -72,6 +72,12 @@ export const site = {
     street: '',
     postalCode: '',
     showStreetAddress: false,
+    /** The business's Google Maps listing, supplied by the client (Oct 2026). Shown on the Contact page. */
+    map: {
+      url: 'https://maps.app.goo.gl/yaskY5SDisPwfj5B8',
+      lat: -34.1174644,
+      lng: 18.8473734,
+    },
   },
 
   serviceArea: { label: "Helderberg Basin, Gordon's Bay & surrounding areas", confirmed: true },

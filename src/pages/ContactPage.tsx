@@ -1,6 +1,7 @@
 import { ArrowUpRight, ChevronRight, Mail, Phone } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { EnquiryForm } from '../components/contact/EnquiryForm'
+import { LocationMap } from '../components/contact/LocationMap'
 import { PageHero } from '../components/layout/PageHero'
 import { PageShell } from '../components/layout/PageShell'
 import { buttonClass } from '../components/ui/buttonClass'
@@ -109,6 +110,8 @@ export default function ContactPage() {
           </Reveal>
         </div>
       </section>
+
+      <LocationMap />
     </PageShell>
   )
 }
